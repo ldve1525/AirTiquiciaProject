@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AirTiquicia.Core\AirTiquicia.Core.csproj" />
+    <ProjectReference Include="..\AirTiquicia.Infrastructure\AirTiquicia.Infrastructure.csproj" />
+    <ProjectReference Include="..\AirTiquiciaApi\AirTiquiciaApi.csproj" />
+  </ItemGroup>
+
+</Project>

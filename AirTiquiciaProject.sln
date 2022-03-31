@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTiquicia.Core", "AirTiqu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTiquicia.Infrastructure", "AirTiquicia.Infrastructure\AirTiquicia.Infrastructure.csproj", "{2F8CC637-A52C-4A7B-B94D-5FFB27EFA4B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTiquiciaWebApp", "AirTiquiciaWebApp\AirTiquiciaWebApp.csproj", "{1A0C97FD-DE07-40A1-938A-C9A64363AD17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTiquicia.Web", "AirTiquicia.Web\AirTiquicia.Web.csproj", "{19E01CB0-715D-4861-A2E3-5E0F79849B44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2F8CC637-A52C-4A7B-B94D-5FFB27EFA4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F8CC637-A52C-4A7B-B94D-5FFB27EFA4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8CC637-A52C-4A7B-B94D-5FFB27EFA4B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0C97FD-DE07-40A1-938A-C9A64363AD17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0C97FD-DE07-40A1-938A-C9A64363AD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0C97FD-DE07-40A1-938A-C9A64363AD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0C97FD-DE07-40A1-938A-C9A64363AD17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E01CB0-715D-4861-A2E3-5E0F79849B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E01CB0-715D-4861-A2E3-5E0F79849B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E01CB0-715D-4861-A2E3-5E0F79849B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E01CB0-715D-4861-A2E3-5E0F79849B44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
