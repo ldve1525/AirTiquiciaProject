@@ -1,4 +1,5 @@
-﻿using AirTiquicia.Infrastructure.Repositories;
+﻿using AirTiquicia.Core.Interfaces;
+using AirTiquicia.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,27 @@ namespace AirTiquiciaApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AirplaneController : Controller
+    public class AirplaneController : ControllerBase
     {
-        [HttpGet]
-        [Route("/GetAirplanes")]
-        public IActionResult GetPlanes()
+        private readonly IAirplaneRepository _airplaneRepository;
+        public AirplaneController(IAirplaneRepository airplaneRepository)
         {
-            var airplane = new AirplaneRepository().GetPlanes();
+            _airplaneRepository = airplaneRepository;
+        }
+
+        [HttpGet]
+        //[Route("/GetAirplanes")]
+        public async Task<IActionResult> GetAirplanes()
+        {
+            var airplanes = await _airplaneRepository.GetAirplanes();
+            return Ok(airplanes);
+        }
+
+        [HttpGet("{id}")]
+        //[Route("/GetAirplane")]
+        public async Task<IActionResult> GetAirplane(string id)
+        {
+            var airplane = await _airplaneRepository.GetAirplane(id);
             return Ok(airplane);
         }
     }

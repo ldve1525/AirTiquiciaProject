@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AirTiquicia.Core\AirTiquicia.Core.csproj" />
     <ProjectReference Include="..\AirTiquicia.Infrastructure\AirTiquicia.Infrastructure.csproj" />
-    <ProjectReference Include="..\AirTiquiciaApi\AirTiquiciaApi.csproj" />
+    <ProjectReference Include="..\AirTiquiciaApi\AirTiquicia.Api.csproj" />
   </ItemGroup>
 
 </Project>

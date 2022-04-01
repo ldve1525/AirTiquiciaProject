@@ -1,4 +1,4 @@
-﻿@page "/Airplanes"
+﻿@page "/Airplane"
 @inject IAirplaneService airplaneService;
 
 <h3>Lista de aviones</h3>
@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th>Identificador</th>
+            <th>Aerolínea</th>
             <th>Descripción</th>
             <th>Tamaño</th>
             <th>Capacidad</th>
@@ -15,12 +16,13 @@
     <tbody>
         @foreach (var airplane in airplaneList)
         {
-            <tr>
-                <td>@airplane.PlaneId</td>
-                <td>@airplane.Description</td>
-                <td>@airplane.Size</td>
-                <td>@airplane.Capacity</td>
-            </tr>
+        <tr>
+            <td>@airplane.IdAirplane</td>
+            <td>@airplane.IdAeroline</td>
+            <td>@airplane.Description</td>
+            <td>@airplane.Size</td>
+            <td>@airplane.Capacity</td>
+        </tr>
         }
     </tbody>
 </table>

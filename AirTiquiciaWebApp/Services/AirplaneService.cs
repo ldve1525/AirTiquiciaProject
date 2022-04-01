@@ -18,7 +18,7 @@ namespace AirTiquiciaWebApp.Services
 
         public async Task<List<Airplane>> GetAirplanes()
         {
-            return await httpClient.GetFromJsonAsync<List<Airplane>>("getairplanes"); 
+            return await httpClient.GetFromJsonAsync<List<Airplane>>("airplane"); 
         }
     }
 }
