@@ -13,6 +13,8 @@ namespace AirTiquiciaWebApp.Services
         Task<Airplane> GetAirplane(string id);
 
         Task<bool> AddAirplane(Airplane airplane);
+
+        Task<Airplane> UpdateAirplane(Airplane airplane);
     }
 }
 

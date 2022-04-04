@@ -53,20 +53,22 @@ namespace AirTiquiciaApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAirplane(int id, AirplaneDTO airplaneDTO)
+        public async Task<IActionResult> UpdateAirplane(AirplaneDTO airplaneDTO)
         {
             var airplane = _mapper.Map<Airplane>(airplaneDTO);
-            var result = await _airplaneRepository.AddAirplane(airplane);
+            //airplane.IdAirplane = id;
+
+            var result = await _airplaneRepository.UpdateAirplane(airplane);
 
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAirplane(int id)
+        public async Task<IActionResult> DeleteAirplane(string id)
         {
-            //var result = await _airplaneRepository.AddAirplane(airplane);
+            var result = await _airplaneRepository.DeleteAirplane(id);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }

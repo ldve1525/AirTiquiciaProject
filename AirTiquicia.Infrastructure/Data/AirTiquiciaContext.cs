@@ -30,8 +30,10 @@ namespace AirTiquicia.Infrastructure.Data
         public virtual DbSet<Flight> Flight { get; set; }
         public virtual DbSet<Luggage> Luggage { get; set; }
         public virtual DbSet<Passenger> Passenger { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
         public virtual DbSet<Seat> Seat { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,6 +62,8 @@ namespace AirTiquicia.Infrastructure.Data
                 entity.HasKey(e => e.IdAirport);
 
                 entity.Property(e => e.IdAirport).HasMaxLength(50);
+
+                entity.Property(e => e.City).HasMaxLength(50);
 
                 entity.Property(e => e.Name).IsRequired();
 
@@ -190,6 +194,23 @@ namespace AirTiquicia.Infrastructure.Data
                 entity.Property(e => e.Phone).HasMaxLength(50);
             });
 
+            modelBuilder.Entity<Price>(entity =>
+            {
+                entity.Property(e => e.Cost).HasColumnType("decimal(12, 2)");
+
+                entity.HasOne(d => d.IdClassNavigation)
+                    .WithMany(p => p.Price)
+                    .HasForeignKey(d => d.IdClass)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Price_Class");
+
+                entity.HasOne(d => d.IdFlightNavigation)
+                    .WithMany(p => p.Price)
+                    .HasForeignKey(d => d.IdFlight)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Price_Flight");
+            });
+
             modelBuilder.Entity<Seat>(entity =>
             {
                 entity.HasOne(d => d.IdClassNavigation)
@@ -206,8 +227,6 @@ namespace AirTiquicia.Infrastructure.Data
                 entity.Property(e => e.IdPassenger)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.Price).HasColumnType("decimal(12, 2)");
 
                 entity.HasOne(d => d.IdClassNavigation)
                     .WithMany(p => p.Ticket)
@@ -232,6 +251,12 @@ namespace AirTiquicia.Infrastructure.Data
                     .HasForeignKey(d => d.IdPassenger)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Ticket_Passenger");
+
+                entity.HasOne(d => d.IdPriceNavigation)
+                    .WithMany(p => p.Ticket)
+                    .HasForeignKey(d => d.IdPrice)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ticket_Price");
             });
         }
     }

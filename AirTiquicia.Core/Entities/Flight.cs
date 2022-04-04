@@ -29,6 +29,7 @@ namespace AirTiquicia.Core.Entities
         public virtual Airplane IdAirplaneNavigation { get; set; }
         public virtual Airport StopoverNavigation { get; set; }
         public virtual ICollection<Crew> Crew { get; set; }
+        public virtual ICollection<Price> Price { get; set; }
         public virtual ICollection<Ticket> Ticket { get; set; }
     }
 }

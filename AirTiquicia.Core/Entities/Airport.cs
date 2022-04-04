@@ -19,6 +19,7 @@ namespace AirTiquicia.Core.Entities
         public string IdAirport { get; set; }
         public string Name { get; set; }
         public int IdCountry { get; set; }
+        public string City { get; set; }
 
         public virtual Country IdCountryNavigation { get; set; }
         public virtual ICollection<Flight> FlightDepartureAirportNavigation { get; set; }

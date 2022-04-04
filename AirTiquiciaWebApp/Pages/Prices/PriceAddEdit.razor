@@ -1,0 +1,56 @@
+﻿@page "/Precios/Nuevo"
+@page "/Precios/{id}"
+@inherits PriceAddEditBase
+
+
+
+<EditForm Model="@price" OnValidSubmit="sendPrice">
+
+    @if (Id != null)
+    {
+        <h3>Editar Precio</h3>
+    }
+    else
+    {
+        <h3>Agregar Precio</h3>
+    }
+
+    <input type="hidden" @bind-value="price.Id" />
+    <hr />
+    <div class="form-group row">
+        <label for="classId" class="col-sm-2 col-form-label">
+            Clase
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="price.IdClass">
+                <option value="1">Económica</option>
+                <option value="2">Ejecutiva</option>
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="flight" class="col-sm-2 col-form-label">
+            Vuelo
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="price.IdFlight">
+                @foreach (var flight in flights)
+                {
+                    <option value="@flight.Id">@flight.Code</option>
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="cost" class="col-sm-2 col-form-label">
+            Precio
+        </label>
+        <div class="col-sm-6">
+            <InputNumber id="cost" class="form-control" @bind-Value="price.Cost"></InputNumber>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</EditForm>
+

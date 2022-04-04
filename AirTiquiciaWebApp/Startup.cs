@@ -31,14 +31,11 @@ namespace AirTiquiciaWebApp
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             //services.AddSingleton<AirplaneService>();
-            services.AddHttpClient<IAirplaneService, AirplaneService>(client =>
-            {
-                client.BaseAddress = new Uri(Configuration["RutaApi"]);
-            });
-            services.AddHttpClient<IAerolineService, AerolineService>(client =>
-            {
-                client.BaseAddress = new Uri(Configuration["RutaApi"]);
-            });
+            services.AddHttpClient<IAirplaneService, AirplaneService>(client => {client.BaseAddress = new Uri(Configuration["RutaApi"]);});
+            services.AddHttpClient<IAerolineService, AerolineService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<IFlightService, FlightService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<IAirportService, AirportService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<IPriceService, PriceService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

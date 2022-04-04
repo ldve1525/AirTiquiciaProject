@@ -18,6 +18,7 @@ namespace AirTiquicia.Core.Entities
         public int Id { get; set; }
         public string Description { get; set; }
 
+        public virtual ICollection<Price> Price { get; set; }
         public virtual ICollection<Seat> Seat { get; set; }
         public virtual ICollection<Ticket> Ticket { get; set; }
     }

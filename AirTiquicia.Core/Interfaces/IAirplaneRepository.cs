@@ -13,5 +13,9 @@ namespace AirTiquicia.Core.Interfaces
         Task<Airplane> GetAirplane(string id);
 
         Task<bool> AddAirplane(Airplane airplane);
+
+        Task<bool> UpdateAirplane(Airplane airplane);
+
+        Task<bool> DeleteAirplane(string id);
     }
 }

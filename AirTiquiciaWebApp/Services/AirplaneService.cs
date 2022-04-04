@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AirTiquiciaWebApp.Services
 {
-    public class AirplaneService:IAirplaneService
+    public class AirplaneService : IAirplaneService
     {
         private readonly HttpClient httpClient;
         public AirplaneService(HttpClient _httpClient)
@@ -41,6 +41,13 @@ namespace AirTiquiciaWebApp.Services
             }
 
             return result;
+        }
+
+        public async Task<Airplane> UpdateAirplane(Airplane airplane)
+        {
+            await httpClient.PutAsJsonAsync<Airplane>("airplane/", airplane);
+
+            return airplane;
         }
     }
 }

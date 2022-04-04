@@ -6,14 +6,22 @@
 
 <EditForm Model="@airplane" OnValidSubmit="sendAirplane">
 
-    <h3>Editar Avión</h3>
+    @if (Id != null)
+    {
+        <h3>Editar Avión</h3>
+    }
+    else
+    {
+        <h3>Agregar Avión</h3>
+    }
+
     <hr />
     <div class="form-group row">
         <label for="airplaneId" class="col-sm-2 col-form-label">
             Identificador
         </label>
         <div class="col-sm-10">
-            <InputText id="airplaneId" class="form-control" placeholder="Identificador" @bind-Value="airplane.IdAirplane"></InputText>
+            <InputText id="airplaneId" disabled="@(Disabled ? true : false)" class="form-control" placeholder="Identificador" @bind-Value="airplane.IdAirplane"></InputText>
         </div>
     </div>
     <div class="form-group row">
@@ -58,5 +66,5 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
-   
+
 </EditForm>

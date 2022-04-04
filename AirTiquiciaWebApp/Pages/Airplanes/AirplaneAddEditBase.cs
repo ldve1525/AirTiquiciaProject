@@ -25,22 +25,33 @@ namespace AirTiquiciaWebApp.Pages.Airplanes
         [Parameter]
         public string Id { get; set; }
 
+        public bool Disabled = false;
+
         protected override async Task OnInitializedAsync()
         {
             if (Id != null)
+            {
                 airplane = await AirplaneService.GetAirplane(Id);
+                Disabled = true;
+            }
+                
             aerolines = ( await AerolineService.GetAerolines()).ToList();
             airplane.IdAeroline = aerolines[0].Id;
         }
 
         protected async Task sendAirplane()
         {
-            var result = await AirplaneService.AddAirplane(airplane);
-
-            if (result)
+            if (Id == null )
             {
-                NavigationManager.NavigateTo("/Aviones");
+                await AirplaneService.AddAirplane(airplane);
             }
+            else
+            {
+                await AirplaneService.UpdateAirplane(airplane);
+            }
+
+
+            NavigationManager.NavigateTo("/Aviones");
         }
     }
 }

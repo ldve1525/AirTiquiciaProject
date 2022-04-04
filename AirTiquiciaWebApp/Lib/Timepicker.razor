@@ -1,0 +1,159 @@
+﻿<style>
+    .timepicker-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .time-dropper {
+        overflow: auto;
+        max-height: 200px;
+    }
+</style>
+<div class="timepicker-wrap">
+    <div class="dropdown" style="margin-right:10px">
+        <button data-toggle="dropdown">
+            @hour h
+        </button>
+        <div class="dropdown-menu time-dropper">
+            @foreach (var h in hoursList)
+            {
+                <a class="dropdown-item" @onclick="() => HoursChange(h)">@h</a>
+            }
+        </div>
+    </div>
+    <div class="dropdown" style="margin-right:10px">
+        <button data-toggle="dropdown">
+            @minutes m
+        </button>
+        <div class="dropdown-menu time-dropper">
+            @foreach (var m in minutesList)
+            {
+                @if (IsAllowedMinutes(m))
+                {
+                    <a class="dropdown-item" @onclick="() => MinutesChanged(m)">@m</a>
+                }
+            }
+        </div>
+    </div>
+</div>
+@code {
+    TimeSpan _time;
+    [Parameter]
+    public TimeSpan Time
+    {
+        get
+        {
+            return _time;
+        }
+        set
+        {
+            _time = value;
+            hour = value.Hours;
+            minutes = value.Minutes;
+        }
+    }
+
+    [Parameter] public EventCallback<TimeSpan> TimeChanged { get; set; }
+
+    int hour;
+    int minutes;
+    List<int> hoursList = new List<int>();
+    List<int> minutesList = new List<int>();
+    int minHour = 1;
+    int maxHour = 24;
+    TimeSpan? _maxTime;
+    [Parameter]
+    public TimeSpan MaxTime
+    {
+        set
+        {
+            if (value != _maxTime)
+            {
+                _maxTime = value;
+                maxHour = value.Hours;
+            }
+        }
+    }
+    int minMinutes = 0;
+    int maxMinutes = 60;
+    TimeSpan? _minTime;
+    [Parameter]
+    public TimeSpan MinTime
+    {
+        set
+        {
+            if (value != _minTime)
+            {
+                _minTime = value;
+                minHour = value.Hours;
+            }
+        }
+    }
+
+    private bool IsAllowedMinutes(int minute)
+    {
+        var t = new TimeSpan(hour, minute, 0);
+        return _minTime <= t && t <= _maxTime;
+    }
+
+    private TimeSpan GetCorrectTime()
+    {
+        var currTime = new TimeSpan(hour, minutes, 0);
+        if (_minTime.HasValue && currTime < _minTime.Value) return _minTime.Value;
+        if (_maxTime.HasValue && currTime > _maxTime.Value) return _maxTime.Value;
+        return currTime;
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        this.ComputesHoursList();
+        this.ComputesMinutesList();
+        RecalculateTime();
+    }
+
+    private void ComputesHoursList()
+    {
+        hoursList.Clear();
+        for (int i = minHour; i <= maxHour; i++)
+        {
+            hoursList.Add(i);
+        }
+    }
+
+    private void ComputesMinutesList()
+    {
+        minutesList.Clear();
+        for (int i = minMinutes; i <= maxMinutes; i++)
+        {
+            minutesList.Add(i);
+        }
+    }
+
+    private void HoursChange(int h)
+    {
+        hour = h;
+        RecalculateTime();
+    }
+
+    private void MinutesChanged(int m)
+    {
+        minutes = m;
+        RecalculateTime();
+    }
+
+    private void RecalculateTime()
+    {
+        var newTime = GetCorrectTime();
+        bool timeChanged = false;
+        if (Time == null)
+            timeChanged = true;
+        if (newTime.Ticks != (Time == null ? 0 : Time.Ticks))
+            timeChanged = true;
+        if (timeChanged)
+        {
+            Time = newTime;
+            TimeChanged.InvokeAsync(Time);
+        }
+    }
+}

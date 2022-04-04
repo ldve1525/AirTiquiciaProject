@@ -40,6 +40,10 @@ namespace AirTiquiciaApi
 
             services.AddTransient<IAirplaneRepository, AirplaneRepository>();
             services.AddTransient<IAerolineRepository, AerolineRepository>();
+            services.AddTransient<IFlightRepository, FlightRepository>();
+            services.AddTransient<IAirportRepository, AirportRepository>();
+            services.AddTransient<IPriceRepository, PriceRepository>();
+            services.AddTransient<IClassRepository, ClassRepository>();
 
             services.AddMvc().AddFluentValidation(options =>
             {

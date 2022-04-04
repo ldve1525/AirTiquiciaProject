@@ -1,0 +1,29 @@
+﻿@page "/Precios"
+@inherits PriceListBase
+
+<h3>Lista de precios</h3>
+<a href="Precios/Nuevo" class="btn btn-primary">Agregar precio</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Clase</th>
+            <th>Vuelo</th>
+            <th>Costo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var price in Prices)
+        {
+            <tr>
+                <td>@price.Id</td>
+                <td>@price.IdClass</td>
+                <td>@price.IdFlight</td>
+                <td>@price.Cost</td>
+
+                <td><a href="/Precios/Detalle/@price.Id" class="btn btn-primary">Ver</a></td>
+                <td><a href="/Precios/@price.Id" class="btn btn-secondary">Editar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

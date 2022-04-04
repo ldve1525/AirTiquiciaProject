@@ -63,8 +63,16 @@ namespace AirTiquicia.Infrastructure.Repositories
             currentAirplane.Capacity = airplane.Capacity;
 
             int rows = await _context.SaveChangesAsync();
-            //
             return rows > 0; 
+        }
+
+        public async Task<bool> DeleteAirplane(string id)
+        {
+            var currentAirplane = await GetAirplane(id);
+            _context.Airplane.Remove(currentAirplane);
+
+            int rows = await _context.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

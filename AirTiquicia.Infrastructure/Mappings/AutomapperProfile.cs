@@ -13,6 +13,12 @@ namespace AirTiquicia.Infrastructure.Mappings
         {
             CreateMap<Airplane, AirplaneDTO>();
             CreateMap<AirplaneDTO, Airplane>();
+
+            CreateMap<Airport, AirportDTO>();
+            CreateMap<AirportDTO, Airport>();
+
+            CreateMap<Price, PriceDTO>();
+            CreateMap<PriceDTO, Price>();
         }
     }
 }

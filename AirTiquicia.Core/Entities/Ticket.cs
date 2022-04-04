@@ -13,7 +13,7 @@ namespace AirTiquicia.Core.Entities
         public int IdFlight { get; set; }
         public string IdPassenger { get; set; }
         public int IdClass { get; set; }
-        public decimal Price { get; set; }
+        public int IdPrice { get; set; }
         public DateTime Date { get; set; }
         public int IdSeat { get; set; }
         public int IdLuggage { get; set; }
@@ -22,5 +22,6 @@ namespace AirTiquicia.Core.Entities
         public virtual Flight IdFlightNavigation { get; set; }
         public virtual Luggage IdLuggageNavigation { get; set; }
         public virtual Passenger IdPassengerNavigation { get; set; }
+        public virtual Price IdPriceNavigation { get; set; }
     }
 }
