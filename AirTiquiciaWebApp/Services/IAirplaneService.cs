@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace AirTiquiciaWebApp.Services
 {
-    interface IAirplaneService
+    public interface IAirplaneService
     {
         Task<List<Airplane>> GetAirplanes();
+
+        Task<Airplane> GetAirplane(string id);
+
+        Task<bool> AddAirplane(Airplane airplane);
     }
 }
+

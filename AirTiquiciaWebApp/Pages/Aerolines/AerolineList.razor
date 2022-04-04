@@ -1,0 +1,25 @@
+﻿@page "/Aerolineas"
+@inherits AerolineListBase
+
+<h3>Lista de aerolineas</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Aerolínea</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aeroline in Aerolines)
+        {
+        <tr>
+            <td>@aeroline.Id</td>
+            <td>@aeroline.Name</td>
+            <td><a href="/Aerolineas/@aeroline.Id" class="btn btn-primary">Ver</a></td>
+            <td><a href="/Aerolineas/@aeroline" class="btn btn-secondary">Editar</a></td>
+            
+        </tr>
+        }
+    </tbody>
+</table>

@@ -11,5 +11,7 @@ namespace AirTiquicia.Core.Interfaces
         Task<IEnumerable<Airplane>> GetAirplanes();
 
         Task<Airplane> GetAirplane(string id);
+
+        Task<bool> AddAirplane(Airplane airplane);
     }
 }

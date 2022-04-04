@@ -1,37 +1,36 @@
 ﻿using AirTiquicia.Core.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AirTiquiciaWebApp.Services
 {
-    public class AirplaneService:IAirplaneService
+    public class AerolineService : IAerolineService
     {
         private readonly HttpClient httpClient;
-        public AirplaneService(HttpClient _httpClient)
+        public AerolineService(HttpClient _httpClient)
         {
             this.httpClient = _httpClient;
         }
 
-        public async Task<List<Airplane>> GetAirplanes()
+        public async Task<List<Aeroline>> GetAerolines()
         {
-            return await httpClient.GetFromJsonAsync<List<Airplane>>("airplane"); 
+            return await httpClient.GetFromJsonAsync<List<Aeroline>>("aeroline");
         }
 
-        public async Task<Airplane> GetAirplane(string id)
+        public async Task<Aeroline> GetAeroline(int id)
         {
-            return await httpClient.GetFromJsonAsync<Airplane>("airplane/"+id);
+            return await httpClient.GetFromJsonAsync<Aeroline>("aeroline/" + id);
         }
 
-        public async Task<bool> AddAirplane(Airplane airplane)
+        public async Task<bool> AddAeroline(Aeroline aeroline)
         {
             bool result = false;
             try
             {
-                await httpClient.PostAsJsonAsync("airplane/", airplane);
+                await httpClient.PostAsJsonAsync("aeroline/", aeroline);
                 result = true;
             }
             catch (Exception)

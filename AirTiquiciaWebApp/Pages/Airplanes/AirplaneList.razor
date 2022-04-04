@@ -1,5 +1,5 @@
-﻿@page "/Airplane"
-@inject IAirplaneService airplaneService;
+﻿@page "/Aviones"
+@inherits AirplaneListBase
 
 <h3>Lista de aviones</h3>
 
@@ -11,10 +11,11 @@
             <th>Descripción</th>
             <th>Tamaño</th>
             <th>Capacidad</th>
+            <th>Acción</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var airplane in airplaneList)
+        @foreach (var airplane in Airplanes)
         {
         <tr>
             <td>@airplane.IdAirplane</td>
@@ -22,21 +23,12 @@
             <td>@airplane.Description</td>
             <td>@airplane.Size</td>
             <td>@airplane.Capacity</td>
+            <td><a href="/Aviones/Detalle/@airplane.IdAirplane" class="btn btn-primary">Ver</a></td>
+            <td><a href="/Aviones/@airplane.IdAirplane" class="btn btn-secondary">Editar</a></td>
+            
         </tr>
         }
     </tbody>
 </table>
 
-@code {
-    private List<Airplane> airplaneList = new List<Airplane>();
 
-    protected override async Task OnInitializedAsync()
-    {
-        await GetAirplanes();
-    }
-
-    private async Task GetAirplanes()
-    {
-        airplaneList = await airplaneService.GetAirplanes();
-    }
-}

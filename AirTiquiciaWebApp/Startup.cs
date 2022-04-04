@@ -33,7 +33,11 @@ namespace AirTiquiciaWebApp
             //services.AddSingleton<AirplaneService>();
             services.AddHttpClient<IAirplaneService, AirplaneService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:44376/");
+                client.BaseAddress = new Uri(Configuration["RutaApi"]);
+            });
+            services.AddHttpClient<IAerolineService, AerolineService>(client =>
+            {
+                client.BaseAddress = new Uri(Configuration["RutaApi"]);
             });
         }
 

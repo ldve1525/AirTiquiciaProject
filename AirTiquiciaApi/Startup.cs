@@ -1,6 +1,7 @@
 using AirTiquicia.Core.Interfaces;
 using AirTiquicia.Infrastructure.Data;
 using AirTiquicia.Infrastructure.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace AirTiquiciaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddControllers();
 
             services.AddDbContext<AirTiquiciaContext>(options =>
@@ -36,6 +39,12 @@ namespace AirTiquiciaApi
             );
 
             services.AddTransient<IAirplaneRepository, AirplaneRepository>();
+            services.AddTransient<IAerolineRepository, AerolineRepository>();
+
+            services.AddMvc().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

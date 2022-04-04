@@ -1,0 +1,62 @@
+﻿@page "/Aviones/Nuevo"
+@page "/Aviones/{id}"
+@inherits AirplaneAddEditBase
+
+
+
+<EditForm Model="@airplane" OnValidSubmit="sendAirplane">
+
+    <h3>Editar Avión</h3>
+    <hr />
+    <div class="form-group row">
+        <label for="airplaneId" class="col-sm-2 col-form-label">
+            Identificador
+        </label>
+        <div class="col-sm-10">
+            <InputText id="airplaneId" class="form-control" placeholder="Identificador" @bind-Value="airplane.IdAirplane"></InputText>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="aerolineId" class="col-sm-2 col-form-label">
+            Aerolínea
+        </label>
+        <div class="col-sm-10">
+            <CustomSelect class="form-control" @bind-Value="airplane.IdAeroline">
+                @foreach (var aeroline in aerolines)
+                {
+                    <option value="@aeroline.Id">@aeroline.Name</option>
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">
+            Descripción
+        </label>
+        <div class="col-sm-10">
+            <InputText id="description" class="form-control" placeholder="Descripción" @bind-Value="airplane.Description"></InputText>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="size" class="col-sm-2 col-form-label">
+            Tamaño
+        </label>
+        <div class="col-sm-10">
+            <CustomSelect class="form-control" @bind-Value="airplane.Size">
+                <option value="1">Pequeño</option>
+                <option value="2">Mediano</option>
+                <option value="3">Grande</option>
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="capacity" class="col-sm-2 col-form-label">
+            Capacidad
+        </label>
+        <div class="col-sm-10">
+            <InputNumber id="capacity" class="form-control" placeholder="Capacidad" @bind-Value="airplane.Capacity"></InputNumber>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+   
+</EditForm>
