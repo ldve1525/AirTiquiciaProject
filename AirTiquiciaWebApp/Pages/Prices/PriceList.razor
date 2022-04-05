@@ -1,6 +1,8 @@
 ﻿@page "/Precios"
 @inherits PriceListBase
 
+@attribute [Authorize]
+
 <h3>Lista de precios</h3>
 <a href="Precios/Nuevo" class="btn btn-primary">Agregar precio</a>
 <table class="table">
@@ -15,15 +17,23 @@
     <tbody>
         @foreach (var price in Prices)
         {
-            <tr>
-                <td>@price.Id</td>
-                <td>@price.IdClass</td>
-                <td>@price.IdFlight</td>
-                <td>@price.Cost</td>
+        <tr>
+            <td>@price.Id</td>
+            @if (price.IdClass == 1)
+            {
+                <td>Clase Económica</td>
+            }
+            else
+            {
+                <td>Clase Ejecutiva</td>
+            }
 
-                <td><a href="/Precios/Detalle/@price.Id" class="btn btn-primary">Ver</a></td>
-                <td><a href="/Precios/@price.Id" class="btn btn-secondary">Editar</a></td>
-            </tr>
+            <td>@price.IdFlight</td>
+            <td>@price.Cost</td>
+
+            <td><a href="/Precios/Detalle/@price.Id" class="btn btn-primary">Ver</a></td>
+            <td><a href="/Precios/@price.Id" class="btn btn-secondary">Editar</a></td>
+        </tr>
         }
     </tbody>
 </table>

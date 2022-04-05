@@ -2,7 +2,7 @@
 @page "/Vuelos/{id}"
 @inherits FlightAddEditBase
 
-
+@attribute [Authorize]
 
 <EditForm Model="@flight" OnValidSubmit="sendFlight">
 

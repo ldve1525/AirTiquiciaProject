@@ -1,6 +1,8 @@
 ﻿@page "/Aviones/Detalle/{id}"
 @inherits AirplaneDetailBase
 
+@attribute [Authorize]
+
 <h3>AirplaneDetail</h3>
 
 <div>@airplane.IdAirplane</div>

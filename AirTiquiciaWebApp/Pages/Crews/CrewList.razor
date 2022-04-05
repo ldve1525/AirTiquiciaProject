@@ -1,0 +1,37 @@
+﻿@page "/Tripulacion"
+@inherits CrewListBase
+
+@attribute [Authorize]
+
+<h3>Lista de tripulaciones</h3>
+<a href="Tripulacion/Nuevo" class="btn btn-primary">Agregar tripulación</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Vuelo</th>
+            <th>Piloto</th>
+            <th>Copiloto</th>
+            <th>Tripulante 1</th>
+            <th>Tripulante 2</th>
+            <th>Tripulante 3</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var crew in Crews)
+        {
+        <tr>
+            <td>@crew.Id</td>
+            <td>@crew.IdFlight</td>
+            <td>@crew.IdPilot</td>
+            <td>@crew.IdCopilot</td>
+            <td>@crew.IdEmployee1</td>
+            <td>@crew.IdEmployee2</td>
+            <td>@crew.IdEmployee3</td>
+            <td><a href="/Aerolineas/@crew.Id" class="btn btn-primary">Ver</a></td>
+            <td><a href="/Aerolineas/@crew.Id" class="btn btn-secondary">Editar</a></td>
+
+        </tr>
+        }
+    </tbody>
+</table>

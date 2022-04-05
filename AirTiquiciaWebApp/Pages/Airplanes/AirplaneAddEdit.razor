@@ -2,7 +2,7 @@
 @page "/Aviones/{id}"
 @inherits AirplaneAddEditBase
 
-
+@attribute [Authorize]
 
 <EditForm Model="@airplane" OnValidSubmit="sendAirplane">
 

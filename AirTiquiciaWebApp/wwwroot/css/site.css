@@ -1,11 +1,35 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+:root {
+    /*Modo claro*/
+    --fondo: #2d2d2d;
+    --fondo-letra: white;
+    --fondo-resaltado: #393939;
+    --fondo-resaltado-2: 414648;
+    --link: #3ca4ff;
+}
+
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 a, .btn-link {
-    color: #0366d6;
+    color: var(--link);
+}
+
+.alert-secondary {
+    background-color: var(--fondo-resaltado-2);
+    color: var(--fondo-letra);
+}
+
+.table{
+    color: var(--fondo-letra);
+}
+
+div.main {
+    background-color: var(--fondo);
+    color: var(--fondo-letra);
 }
 
 .btn-primary {
@@ -47,11 +71,11 @@ app {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, rgb(0, 0, 0) 0%, #2d2d2d 70%);
 }
 
     .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
+        background-color: black;
     }
 
     .sidebar .navbar-brand {

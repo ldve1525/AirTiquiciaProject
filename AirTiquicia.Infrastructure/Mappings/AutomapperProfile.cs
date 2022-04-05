@@ -19,6 +19,9 @@ namespace AirTiquicia.Infrastructure.Mappings
 
             CreateMap<Price, PriceDTO>();
             CreateMap<PriceDTO, Price>();
+
+            CreateMap<Employee, EmployeeDTO>();
+            CreateMap<EmployeeDTO, Employee>();
         }
     }
 }

@@ -90,13 +90,13 @@ namespace AirTiquicia.Infrastructure.Data
 
             modelBuilder.Entity<Crew>(entity =>
             {
-                entity.Property(e => e.IdEmployee)
+                entity.Property(e => e.IdEmployee1)
                     .IsRequired()
                     .HasMaxLength(50);
 
                 entity.HasOne(d => d.IdEmployeeNavigation)
                     .WithMany(p => p.Crew)
-                    .HasForeignKey(d => d.IdEmployee)
+                    .HasForeignKey(d => d.IdEmployee1)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Crew_Employee");
 

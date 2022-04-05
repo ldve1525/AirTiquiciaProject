@@ -1,6 +1,8 @@
 ﻿@page "/Vuelos"
 @inherits FlightListBase
 
+@attribute [Authorize]
+
 <h3>Lista de vuelos</h3>
 <a href="Vuelos/Nuevo" class="btn btn-primary">Agregar vuelo</a>
 <table class="table">
@@ -19,19 +21,19 @@
     <tbody>
         @foreach (var flight in Flights)
         {
-        <tr>
-            <td>@flight.Id</td>
-            <td>@flight.Code</td>
-            <td>@flight.IdAirplane</td>
-            <td>@flight.DepartureAirport</td>
-            <td>@flight.DepartureDate</td>
-            <td>@flight.DestinationAirport</td>
-            <td>@flight.ArrivalDate</td>
-            <td>@flight.Stopover</td>
-            <td><a href="/Vuelos/Detalle/@flight.Id" class="btn btn-primary">Ver</a></td>
-            <td><a href="/Vuelos/@flight.Id" class="btn btn-secondary">Editar</a></td>
+            <tr>
+                <td>@flight.Id</td>
+                <td>@flight.Code</td>
+                <td>@flight.IdAirplane</td>
+                <td>@flight.DepartureAirport</td>
+                <td>@flight.DepartureDate</td>
+                <td>@flight.DestinationAirport</td>
+                <td>@flight.ArrivalDate</td>
+                <td>@flight.Stopover</td>
+                <td><a href="/Vuelos/Detalle/@flight.Id" class="btn btn-primary">Ver</a></td>
+                <td><a href="/Vuelos/@flight.Id" class="btn btn-secondary">Editar</a></td>
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>

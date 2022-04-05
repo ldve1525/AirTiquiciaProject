@@ -1,0 +1,116 @@
+﻿@page "/Tripulacion/Nuevo"
+@page "/Tripulacion/{id}"
+@inherits CrewAddEditBase
+
+@attribute [Authorize]
+
+<EditForm Model="@crew" OnValidSubmit="sendCrew">
+
+    @if (Id != null)
+    {
+        <h3>Editar Tripulación</h3>
+    }
+    else
+    {
+        <h3>Agregar Tripulación</h3>
+    }
+
+    <input type="hidden" @bind-value="crew.Id" />
+    <hr />
+    <div class="form-group row">
+        <label for="flight" class="col-sm-2 col-form-label">
+            Vuelo
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdFlight">
+                @foreach (var flight in flights)
+                {
+                    <option value="@flight.Id">@flight.Code</option>
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="pilot" class="col-sm-2 col-form-label">
+            Piloto
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdPilot">
+                @foreach (var employee in employees)
+                {
+                    if (employee.JobCategory == 1)
+                    {
+                        <option value="@employee.IdEmployee">@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="copilot" class="col-sm-2 col-form-label">
+            Coiloto
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdCopilot">
+                @foreach (var employee in employees)
+                {
+                    if (employee.JobCategory == 2)
+                    {
+                        <option value="@employee.IdEmployee">@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="trip1" class="col-sm-2 col-form-label">
+            Tripulante 1
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdEmployee1">
+                @foreach (var employee in employees)
+                {
+                    if (employee.JobCategory == 3)
+                    {
+                        <option value="@employee.IdEmployee">@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="trip2" class="col-sm-2 col-form-label">
+            Tripulante 2
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdEmployee2">
+                @foreach (var employee in employees)
+                {
+                    if (employee.JobCategory == 3)
+                    {
+                        <option value="@employee.IdEmployee">@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </CustomSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="trip3" class="col-sm-2 col-form-label">
+            Tripulante 3
+        </label>
+        <div class="col-sm-6">
+            <CustomSelect class="form-control" @bind-Value="crew.IdEmployee3">
+                @foreach (var employee in employees)
+                {
+                    if (employee.JobCategory == 3)
+                    {
+                        <option value="@employee.IdEmployee">@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </CustomSelect>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</EditForm>

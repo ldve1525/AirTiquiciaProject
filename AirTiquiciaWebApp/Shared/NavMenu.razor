@@ -1,5 +1,5 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">AirTiquiciaWebApp</a>
+    <a class="navbar-brand" href="">Air Tiquicia</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,41 +7,58 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Aviones">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Aviones
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Aerolineas">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Aerolineas
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Vuelos">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Vuelos
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Precios">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Precios
-            </NavLink>
-        </li>
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Aviones">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Aviones
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Aerolineas">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Aerolineas
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Vuelos">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Vuelos
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Precios">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Precios
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Tripulacion/Nuevo">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Agregar Tripulacion
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="Reportes">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Reportes
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="/Identity/account/logout">
+                        <span class="oi oi-power-standby" aria-hidden="true"></span> Logout
+                    </NavLink>
+                </li>
+            </Authorized>
+            <NotAuthorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="/Identity/account/login">
+                        <span class="oi oi-lock-locked" aria-hidden="true"></span> Login
+                    </NavLink>
+                </li>
+            </NotAuthorized>
+        </AuthorizeView>
+        
     </ul>
 </div>
 

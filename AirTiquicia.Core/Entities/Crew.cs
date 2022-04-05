@@ -11,7 +11,11 @@ namespace AirTiquicia.Core.Entities
     {
         public int Id { get; set; }
         public int IdFlight { get; set; }
-        public string IdEmployee { get; set; }
+        public string IdEmployee1 { get; set; }
+        public string IdEmployee2 { get; set; }
+        public string IdEmployee3 { get; set; }
+        public string IdPilot { get; set; }
+        public string IdCopilot { get; set; }
 
         public virtual Employee IdEmployeeNavigation { get; set; }
         public virtual Flight IdFlightNavigation { get; set; }

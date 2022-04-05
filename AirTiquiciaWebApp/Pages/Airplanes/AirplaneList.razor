@@ -1,6 +1,8 @@
 ﻿@page "/Aviones"
 @inherits AirplaneListBase
 
+@attribute [Authorize]
+
 <h3>Lista de aviones</h3>
 <a href="Aviones/Nuevo" class="btn btn-primary">Agregar avión</a>
 <table class="table">
@@ -17,16 +19,16 @@
     <tbody>
         @foreach (var airplane in Airplanes)
         {
-        <tr>
-            <td>@airplane.IdAirplane</td>
-            <td>@airplane.IdAeroline</td>
-            <td>@airplane.Description</td>
-            <td>@airplane.Size</td>
-            <td>@airplane.Capacity</td>
-            <td><a href="/Aviones/Detalle/@airplane.IdAirplane" class="btn btn-primary">Ver</a></td>
-            <td><a href="/Aviones/@airplane.IdAirplane" class="btn btn-secondary">Editar</a></td>
-            
-        </tr>
+            <tr>
+                <td>@airplane.IdAirplane</td>
+                <td>@airplane.IdAeroline</td>
+                <td>@airplane.Description</td>
+                <td>@airplane.Size</td>
+                <td>@airplane.Capacity</td>
+                <td><a href="/Aviones/Detalle/@airplane.IdAirplane" class="btn btn-primary">Ver</a></td>
+                <td><a href="/Aviones/@airplane.IdAirplane" class="btn btn-secondary">Editar</a></td>
+
+            </tr>
         }
     </tbody>
 </table>

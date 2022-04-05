@@ -2,7 +2,7 @@
 @page "/Precios/{id}"
 @inherits PriceAddEditBase
 
-
+@attribute [Authorize]
 
 <EditForm Model="@price" OnValidSubmit="sendPrice">
 
