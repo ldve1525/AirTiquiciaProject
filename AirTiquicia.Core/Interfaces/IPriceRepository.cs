@@ -12,6 +12,8 @@ namespace AirTiquicia.Core.Interfaces
 
         Task<Price> GetPrice(int id);
 
+        Task<Price> GetPrice(int idClass, int idFlight);
+
         Task<bool> AddPrice(Price price);
 
         Task<bool> UpdatePrice(Price price);

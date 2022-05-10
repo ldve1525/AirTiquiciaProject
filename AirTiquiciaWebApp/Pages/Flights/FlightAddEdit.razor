@@ -2,9 +2,9 @@
 @page "/Vuelos/{id}"
 @inherits FlightAddEditBase
 
-@attribute [Authorize]
+@*@attribute [Authorize]*@
 
-<EditForm Model="@flight" OnValidSubmit="sendFlight">
+<EditForm Model="@Flight" OnValidSubmit="sendFlight">
 
     @if (Id != null)
     {
@@ -15,14 +15,14 @@
         <h3>Agregar Vuelo</h3>
     }
 
-    <input type="hidden" @bind-value="flight.Id" />
+    <input type="hidden" @bind-value="Flight.Id" />
     <hr />
     <div class="form-group row">
         <label for="flightCode" class="col-sm-2 col-form-label">
             Código
         </label>
         <div class="col-sm-6">
-            <InputText id="code" class="form-control" placeholder="Código" @bind-Value="flight.Code"></InputText>
+            <InputText id="code" class="form-control" placeholder="Código" @bind-Value="Flight.Code"></InputText>
         </div>
     </div>
     <div class="form-group row">
@@ -30,8 +30,8 @@
             Avión
         </label>
         <div class="col-sm-6">
-            <CustomSelect class="form-control" @bind-Value="flight.IdAirplane">
-                @foreach (var airplane in airplanes)
+            <CustomSelect class="form-control" @bind-Value="Flight.IdAirplane">
+                @foreach (var airplane in Airplanes)
                 {
                     <option value="@airplane.IdAirplane">@airplane.IdAirplane</option>
                 }
@@ -43,8 +43,8 @@
             Origen
         </label>
         <div class="col-sm-6">
-            <CustomSelect class="form-control" @bind-Value="flight.DepartureAirport">
-                @foreach (var airport in airports)
+            <CustomSelect class="form-control" @bind-Value="Flight.DepartureAirport">
+                @foreach (var airport in Airports)
                 {
                     <option value="@airport.IdAirport">@airport.Name</option>
                 }
@@ -56,7 +56,7 @@
             Fecha de salida
         </label>
         <div class="col-sm-2">
-            <InputDate id="departureDate" class="form-control" @bind-Value="flight.DepartureDate"></InputDate>
+            <InputDate id="departureDate" class="form-control" @bind-Value="Flight.DepartureDate"></InputDate>
         </div>
         <label for="departureHour" class="col-sm-1 col-form-label">
             Hora
@@ -76,8 +76,8 @@
             Destino
         </label>
         <div class="col-sm-6">
-            <CustomSelect class="form-control" @bind-Value="flight.DestinationAirport">
-                @foreach (var airport in airports)
+            <CustomSelect class="form-control" @bind-Value="Flight.DestinationAirport">
+                @foreach (var airport in Airports)
                 {
                     <option value="@airport.IdAirport">@airport.Name</option>
                 }
@@ -89,7 +89,7 @@
             Fecha de llegada
         </label>
         <div class="col-sm-2">
-            <InputDate id="arrivalDate" class="form-control" @bind-Value="flight.ArrivalDate"></InputDate>
+            <InputDate id="arrivalDate" class="form-control" @bind-Value="Flight.ArrivalDate"></InputDate>
         </div>
         <label for="arrivalHour" class="col-sm-1 col-form-label">
             Hora
@@ -105,12 +105,23 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="stopover" class="col-sm-2 col-form-label">
+        <label for="type" class="col-sm-2 col-form-label">
+            Tipo de vuelo
+        </label>
+        <div class="col-sm-2">
+            <select id="tipoVuelo" class="form-control" @bind=@Flight.Type>
+                <option value="1">Sencillo</option>
+                <option value="2">Ida y vuelta</option>
+                <option value="3">Con escalas</option>
+            </select>
+        </div>
+        <label for="stopover" class="col-sm-1 col-form-label">
             Escala
         </label>
-        <div class="col-sm-6">
-            <CustomSelect class="form-control" @bind-Value="flight.Stopover">
-                @foreach (var airport in airports)
+        <div class="col-sm-3">
+            <CustomSelect disabled class="form-control" @bind-Value="Flight.Stopover">
+                <option value="NULL" selected>Seleccione el aeropuerto</option>
+                @foreach (var airport in Airports)
                 {
                     <option value="@airport.IdAirport">@airport.Name</option>
                 }

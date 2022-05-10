@@ -34,6 +34,22 @@ namespace AirTiquicia.Api.Controllers
             return Ok(flight);
         }
 
+        [HttpGet("{Airport1}/{Airport2}/{Date1}/{Date2}/{SeatsEconomic}/{SeatsExecutive}")]
+        public async Task<IActionResult> GetRoundtripFlight(string Airport1, string Airport2, string Date1, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            var flights = await _flightRepository.GetRoundtripFlight(Airport1, Airport2, Date1, Date2, SeatsEconomic, SeatsExecutive);
+
+            return Ok(flights);
+        }
+
+        [HttpGet("{Airport1}/{Airport2}/{Date2}/{SeatsEconomic}/{SeatsExecutive}")]
+        public async Task<IActionResult> GetReturnFlight(string Airport1, string Airport2, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            var flights = await _flightRepository.GetReturnFlight(Airport1, Airport2, Date2, SeatsEconomic, SeatsExecutive);
+
+            return Ok(flights);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddFlight(Flight flight)
         {

@@ -1,0 +1,89 @@
+﻿@page "/Usuarios/Viaje"
+@inherits ConfirmSelectionsBase
+
+<h3>Detalles del viaje</h3>
+<br />
+<div>Viaje de ida - @OutboundDepartureDate &emsp; Duración: @formattedOBTimeSpan</div>
+
+<div>Salida: @DepartureAirport.City (@OutboundFlight.DepartureAirport) - @OutboundFlight.DepartureDate.ToString("hh:mm tt")</div>
+<div>Llegada: @DestinationAirport.City (@OutboundFlight.DestinationAirport) - @OutboundFlight.ArrivalDate.ToString("hh:mm tt")</div>
+<div>Vuelo: @OutboundFlight.Code</div>
+<div>Aeronave: @OutboundFlight.IdAirplane</div>
+<div>Aerolínea: @OBAeroline.Name</div>
+<div>Clase: @Class</div>
+<div>Precio: @OBPrice.Cost</div>
+
+<br />
+<div>Viaje de regreso - @ReturnDepartureDate &emsp; Duración: @formattedReturnTimeSpan</div>
+
+<div>Salida: @DestinationAirport.City (@ReturnFlight.DepartureAirport) - @ReturnFlight.DepartureDate.ToString("hh:mm tt")</div>
+<div>Llegada: @DepartureAirport.City (@ReturnFlight.DestinationAirport) - @ReturnFlight.ArrivalDate.ToString("hh:mm tt")</div>
+<div>Vuelo: @ReturnFlight.Code</div>
+<div>Aeronave: @ReturnFlight.IdAirplane</div>
+<div>Aerolínea: @ReturnAeroline.Name</div>
+<div>Clase: @Class</div>
+<div>Precio: $@ReturnPrice.Cost</div>
+
+<br />
+<h3>Pasajeros</h3>
+<br />
+
+@foreach (var passenger in Passengers)
+{
+    <div>Datos de pasajero # @Counter</div>
+    <br />
+    <div class="group col-sm-8">
+        <div class="form-group row">
+            Tipo de identificación: &nbsp;
+            @switch (passenger.DocumentType)
+            {
+                case 1:
+                    <div>Pasaporte</div>
+                    break;
+                case 2:
+                    <div>Documento de identidad</div>
+                    break;
+                case 3:
+                    <div>Licencia de conducir</div>
+                    break;
+            }
+        </div>
+        <div class="form-group row">
+            Número de Identificación: @passenger.Id
+        </div>
+        <div class="form-group row">
+            Nombre: @passenger.FirstName
+        </div>
+        <div class="form-group row">
+            Apellidos: @passenger.LastName
+        </div>
+        <div class="form-group row">
+            Fecha de nacimiento: @passenger.Birthdate.ToShortDateString()
+        </div>
+        <div class="form-group row">
+            Nacionalidad: @passenger.Nationality
+        </div>
+        <div class="form-group row">
+            Teléfono: @passenger.Phone
+        </div>
+        <div class="form-group row">
+            Email: @passenger.Email
+        </div>
+    </div>
+    <br />
+    Counter++;
+}
+
+<button type="button" class="btn btn-primary" @onclick="SendEmail">Enviar por correo</button>
+
+@if (confirmed)
+{
+    modal.Show<ConfirmedModal>("Compra de tiquetes finalizada");
+    confirmed = false;
+}
+
+@if (sent)
+{
+    modal.Show<EmailSentModal>("Email enviado");
+    confirmed = false;
+}

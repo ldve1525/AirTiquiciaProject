@@ -1,0 +1,16 @@
+﻿@inject IModalService modal
+
+<div>
+    El comprobante ha sido enviado por correo electrónico.
+</div>
+<br />
+<button @onclick="Cancel" class="btn btn-primary right">Cerrar</button>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    void Cancel()
+    {
+        ModalInstance.CancelAsync();
+    }
+}

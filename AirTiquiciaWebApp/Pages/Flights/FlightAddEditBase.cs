@@ -13,7 +13,7 @@ namespace AirTiquiciaWebApp.Pages.Flights
         [Inject]
         public IFlightService FlightService { get; set; }
 
-        public Flight flight { get; set; } = new Flight();
+        public Flight Flight { get; set; } = new Flight();
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -21,13 +21,13 @@ namespace AirTiquiciaWebApp.Pages.Flights
         [Inject]
         public IAirplaneService AirplaneService { get; set; }
 
-        public List<Airplane> airplanes { get; set; } = new List<Airplane>();
+        public List<Airplane> Airplanes { get; set; } = new List<Airplane>();
+        public Airplane Airplane { get; set; } = new Airplane();
 
         [Inject]
         public IAirportService AirportService { get; set; }
 
-        public List<Airport> airports { get; set; } = new List<Airport>();
-        public Airport airport { get; set; } = new Airport();
+        public List<Airport> Airports { get; set; } = new List<Airport>();
 
         [Parameter]
         public string Id { get; set; }
@@ -42,43 +42,51 @@ namespace AirTiquiciaWebApp.Pages.Flights
 
         protected override async Task OnInitializedAsync()
         {
-            airplanes = (await AirplaneService.GetAirplanes()).ToList();
-            airports = (await AirportService.GetAirports()).ToList();
+            Airplanes = (await AirplaneService.GetAirplanes()).ToList();
+            Airports = (await AirportService.GetAirports()).ToList();
 
             if (Id != null)
             {
-                flight = await FlightService.GetFlight(int.Parse(Id));
-                departureHour = flight.DepartureDate.Hour;
-                departureMinutes = flight.DepartureDate.Minute;
-                arrivalHour = flight.ArrivalDate.Hour;
-                arrivalMinutes = flight.ArrivalDate.Minute;
+                Flight = await FlightService.GetFlight(int.Parse(Id));
+                departureHour = Flight.DepartureDate.Hour;
+                departureMinutes = Flight.DepartureDate.Minute;
+                arrivalHour = Flight.ArrivalDate.Hour;
+                arrivalMinutes = Flight.ArrivalDate.Minute;
             }
             else
             {
-                flight.DepartureDate = DateTime.Now;
-                flight.ArrivalDate = DateTime.Now;
-                flight.IdAirplane = airplanes[0].IdAirplane;
-                flight.DepartureAirport = airports[0].IdAirport;
-                flight.DestinationAirport = airports[0].IdAirport;
-                flight.Stopover = airports[0].IdAirport;
+                Flight.DepartureDate = DateTime.Now;
+                Flight.ArrivalDate = DateTime.Now;
+                Flight.IdAirplane = Airplanes[0].IdAirplane;
+                Flight.DepartureAirport = Airports[0].IdAirport;
+                Flight.DestinationAirport = Airports[0].IdAirport;
+                Flight.Stopover = "NULL";
+                Flight.Type = 1;
             }
         }
 
         protected async Task sendFlight()
         {
-            flight.DepartureDate = flight.DepartureDate.AddHours(departureHour);
-            flight.DepartureDate = flight.DepartureDate.AddMinutes(departureMinutes);
+            Flight.DepartureDate = Flight.DepartureDate.AddHours(departureHour);
+            Flight.DepartureDate = Flight.DepartureDate.AddMinutes(departureMinutes);
 
-            flight.ArrivalDate = flight.ArrivalDate.AddHours(arrivalHour);
-            flight.ArrivalDate = flight.ArrivalDate.AddMinutes(arrivalMinutes);
+            Flight.ArrivalDate = Flight.ArrivalDate.AddHours(arrivalHour);
+            Flight.ArrivalDate = Flight.ArrivalDate.AddMinutes(arrivalMinutes);
+
+            Airplane = await AirplaneService.GetAirplane(Flight.IdAirplane);
+            Flight.SeatsEconomic = Airplane.CapacityEconomic;
+            Flight.SeatsExecutive = Airplane.CapacityExecutive;
+
+            if (Flight.Stopover == "NULL")
+                Flight.Stopover = null;
 
             if (Id == null)
             {
-                await FlightService.AddFlight(flight);
+                await FlightService.AddFlight(Flight);
             }
             else
             {
-                await FlightService.UpdateFlight(flight);
+                await FlightService.UpdateFlight(Flight);
             }
 
 

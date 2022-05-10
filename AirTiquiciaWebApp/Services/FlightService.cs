@@ -1,4 +1,5 @@
 ﻿using AirTiquicia.Core.Entities;
+using AirTiquicia.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,16 @@ namespace AirTiquiciaWebApp.Services
         public async Task<Flight> GetFlight(int id)
         {
             return await httpClient.GetFromJsonAsync<Flight>("flight/" + id);
+        }
+
+        public async Task<List<FlightDTO>> GetRoundtripFlight(string Airport1, string Airport2, string Date1, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            return await httpClient.GetFromJsonAsync<List<FlightDTO>>("flight/" + Airport1 + "/" + Airport2 + "/" + Date1 + "/" + Date2 + "/" + SeatsEconomic + "/" + SeatsExecutive);
+        }
+
+        public async Task<List<FlightDTO>> GetReturnFlight(string Airport1, string Airport2, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            return await httpClient.GetFromJsonAsync<List<FlightDTO>>("flight/" + Airport1 + "/" + Airport2 + "/" + Date2 + "/" + SeatsEconomic + "/" + SeatsExecutive);
         }
 
         public async Task<bool> AddFlight(Flight flight)

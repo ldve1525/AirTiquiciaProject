@@ -26,6 +26,11 @@ namespace AirTiquiciaWebApp.Services
             return await httpClient.GetFromJsonAsync<Price>("price/" + id);
         }
 
+        public async Task<Price> GetPrice(int idClass, int idFlight)
+        {
+            return await httpClient.GetFromJsonAsync<Price>("price/" + idClass + "/" + idFlight);
+        }
+
         public async Task<bool> AddPrice(Price price)
         {
             bool result = false;

@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirTiquiciaWebApp.Services;
+using Blazored.LocalStorage;
+using Blazored.Modal;
 
 namespace AirTiquiciaWebApp
 {
@@ -40,6 +42,15 @@ namespace AirTiquiciaWebApp
             services.AddHttpClient<IPriceService, PriceService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
             services.AddHttpClient<ICrewService, CrewService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
             services.AddHttpClient<IEmployeeService, EmployeeService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<ITicketService, TicketService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<IClassService, ClassService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<ILuggageService, LuggageService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<IPassengerService, PassengerService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+            services.AddHttpClient<ISeatService, SeatService>(client => { client.BaseAddress = new Uri(Configuration["RutaApi"]); });
+
+            services.AddSession();
+            services.AddBlazoredLocalStorage();
+            services.AddBlazoredModal();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +69,8 @@ namespace AirTiquiciaWebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
             app.UseAuthentication();

@@ -14,6 +14,13 @@ namespace AirTiquicia.Core.DTOs
         public string DestinationAirport { get; set; }
         public DateTime ArrivalDate { get; set; }
         public string Stopover { get; set; }
+        public int Type { get; set; }
+        public int SeatsEconomic { get; set; }
+        public int SeatsExecutive { get; set; }
+        public int Adults { get; set; }
+        public int Kids { get; set; }
+        public int Babies { get; set; }
+        public decimal Cost { get; set; }
 
         public int hour { get; set; }
         public int time { get; set; }

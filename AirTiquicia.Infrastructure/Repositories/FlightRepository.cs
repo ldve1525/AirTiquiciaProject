@@ -33,9 +33,28 @@ namespace AirTiquicia.Infrastructure.Repositories
             return flight;
         }
 
+        public async Task<IEnumerable<Flight>> GetRoundtripFlight(string Airport1, string Airport2, string Date1, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            var flights = await Task.FromResult(_context.Flight
+                .FromSqlRaw<Flight>("getFlight {0}, {1}, {2}, {3}, {4}, {5}", Airport1, Airport2, Date1, Date2, SeatsEconomic, SeatsExecutive)
+                .ToList());
+
+            return flights;
+        }
+
+        public async Task<IEnumerable<Flight>> GetReturnFlight(string Airport1, string Airport2, string Date2, int SeatsEconomic, int SeatsExecutive)
+        {
+            var flights = await Task.FromResult(_context.Flight
+                .FromSqlRaw<Flight>("getReturnFlight {0}, {1}, {2}, {3}, {4}", Airport1, Airport2, Date2, SeatsEconomic, SeatsExecutive)
+                .ToList());
+
+            return flights;
+        }
+
         public async Task<bool> AddFlight(Flight flight)
         {
-            bool added = false;
+            bool added;
+
             try
             {
                 _context.Flight.Add(flight);
@@ -63,6 +82,9 @@ namespace AirTiquicia.Infrastructure.Repositories
             currentFlight.DestinationAirport = flight.DestinationAirport;
             currentFlight.ArrivalDate = flight.ArrivalDate;
             currentFlight.Stopover = flight.Stopover;
+            currentFlight.Type = flight.Type;
+            currentFlight.SeatsEconomic = flight.SeatsEconomic;
+            currentFlight.SeatsExecutive = flight.SeatsExecutive;
 
             int rows = await _context.SaveChangesAsync();
             return rows > 0;

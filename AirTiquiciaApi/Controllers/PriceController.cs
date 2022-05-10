@@ -34,6 +34,14 @@ namespace AirTiquicia.Api.Controllers
             return Ok(price);
         }
 
+        [HttpGet("{idClass}/{idFlight}")]
+        public async Task<IActionResult> GetPrice(int idClass, int idFlight)
+        {
+            var price = await _priceRepository.GetPrice(idClass, idFlight);
+
+            return Ok(price);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddPrice(Price price)
         {

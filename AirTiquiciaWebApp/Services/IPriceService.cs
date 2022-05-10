@@ -12,8 +12,10 @@ namespace AirTiquiciaWebApp.Services
 
         Task<Price> GetPrice(int id);
 
-        Task<bool> AddPrice(Price orice);
+        Task<Price> GetPrice(int idClass, int idFlight);
 
-        Task<Price> UpdatePrice(Price orice);
+        Task<bool> AddPrice(Price price);
+
+        Task<Price> UpdatePrice(Price price);
     }
 }

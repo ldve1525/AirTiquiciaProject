@@ -1,0 +1,16 @@
+﻿@inject IModalService modal
+
+<div>
+    Solo se permite un máximo de 3 maletas por usuario. 
+</div> 
+<br />
+<button @onclick="Cancel" class="btn btn-primary right">Cerrar</button>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    void Cancel()
+    {
+        ModalInstance.CancelAsync();
+    }
+}

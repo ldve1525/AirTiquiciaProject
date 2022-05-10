@@ -1,0 +1,105 @@
+﻿@page "/Usuarios/Seleccionar"
+@inherits ChooseFlightBase
+
+@if (Flights.Count > 0)
+{
+    <h3>Escoger vuelo</h3>
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-9"></div>
+            <label class="col-sm-2">Ordenar por:</label>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-9"></div>
+            <select class="form-control col-sm-2" value="@orderBy" @onchange="OrderBy">
+                <option value="1">Hora</option>
+                <option value="2">Precio más bajo</option>
+                <option value="3">Precio más alto</option>
+            </select>
+        </div>
+    </div>
+
+    <EditForm Model="@Flights" OnValidSubmit="selectFlights">
+
+        <h5>Vuelos de ida</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Avión</th>
+                    <th>Origen</th>
+                    <th>Fecha de salida</th>
+                    <th>Destino</th>
+                    <th>Fecha de salida</th>
+                    <th>Escala</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var flight in Flights)
+                {
+                    <tr>
+                        <td>@flight.Code</td>
+                        <td>@flight.IdAirplane</td>
+                        <td>@flight.DepartureAirport</td>
+                        <td>@flight.DepartureDate</td>
+                        <td>@flight.DestinationAirport</td>
+                        <td>@flight.ArrivalDate</td>
+                        <td>@flight.Stopover</td>
+                        <td>@flight.Cost</td>
+                        <td><input type="radio" name="outbound" value="@flight.Id" @onchange="SelectOutboundFlight"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h5>Vuelos de regreso</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Avión</th>
+                    <th>Origen</th>
+                    <th>Fecha de salida</th>
+                    <th>Destino</th>
+                    <th>Fecha de salida</th>
+                    <th>Escala</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var returnFlight in ReturnFlights)
+                {
+                    <tr>
+                        <td>@returnFlight.Code</td>
+                        <td>@returnFlight.IdAirplane</td>
+                        <td>@returnFlight.DepartureAirport</td>
+                        <td>@returnFlight.DepartureDate</td>
+                        <td>@returnFlight.DestinationAirport</td>
+                        <td>@returnFlight.ArrivalDate</td>
+                        <td>@returnFlight.Stopover</td>
+                        <td>@returnFlight.Cost</td>
+                        <td><input type="radio" name="return" value="@returnFlight.Id" @onchange="SelectReturnFlight"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+
+    </EditForm>
+}
+else
+{
+    <h1>Lo sentimos!</h1>
+
+    <p>La búsqueda no arrojó ningún resultado.</p>
+}
+
+@if (showModal)
+{
+    modal.Show<SelectFlightsModal>("Seleccione los vuelos");
+    showModal = false;
+}

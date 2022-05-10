@@ -23,6 +23,10 @@ namespace AirTiquicia.Core.Entities
         public string DestinationAirport { get; set; }
         public DateTime ArrivalDate { get; set; }
         public string Stopover { get; set; }
+        public int Type { get; set; }
+        public int SeatsEconomic { get; set; }
+        public int SeatsExecutive { get; set; }
+        
 
         public virtual Airport DepartureAirportNavigation { get; set; }
         public virtual Airport DestinationAirportNavigation { get; set; }

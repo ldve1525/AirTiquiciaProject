@@ -33,6 +33,13 @@ namespace AirTiquicia.Infrastructure.Repositories
             return price;
         }
 
+        public async Task<Price> GetPrice(int idClass, int idFlight)
+        {
+            var price = await _context.Price.FirstOrDefaultAsync(x => x.IdClass == idClass && x.IdFlight == idFlight);
+
+            return price;
+        }
+
         public async Task<bool> AddPrice(Price price)
         {
             bool added = false;

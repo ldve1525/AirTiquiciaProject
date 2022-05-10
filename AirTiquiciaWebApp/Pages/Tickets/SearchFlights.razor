@@ -1,0 +1,96 @@
+﻿@page "/Usuarios/Vuelos"
+@inherits SearchFlightsBase
+
+<EditForm Model="@Flight" OnValidSubmit="searchFlights">
+    <div class="form-group row">
+        <label for="flight" class="col-sm-2 col-form-label">
+            Vuelo
+        </label>
+        <div class="col-sm-4">
+            <select id="flight" class="form-control" @bind=@flight>
+                <option value="1">Sencillo</option>
+                <option value="2">Ida y vuelta</option>
+            </select>
+        </div>
+        <label for="type" class="col-sm-2 col-form-label">
+            Tipo
+        </label>
+        <div class="col-sm-2">
+            <select id="type" class="form-control" @bind=@type>
+                <option value="1">Directo</option>
+                <option value="2">Con escalas</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="departure" class="col-sm-2 col-form-label">
+            Origen
+        </label>
+        <div class="col-sm-4">
+            <CustomSelect class="form-control" @bind-Value="Flight.DepartureAirport">
+                @foreach (var airport in Airports)
+                {
+                    <option value="@airport.IdAirport">@airport.Name</option>
+                }
+            </CustomSelect>
+        </div>
+        <label for="departureDate" class="col-sm-2 col-form-label">
+            Fecha de salida
+        </label>
+        <div class="col-sm-2">
+            <InputDate id="departureDate" class="form-control" @bind-Value="Flight.DepartureDate"></InputDate>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="destination" class="col-sm-2 col-form-label">
+            Destino
+        </label>
+        <div class="col-sm-4">
+            <CustomSelect class="form-control" @bind-Value="Flight.DestinationAirport">
+                <option value="NULL" disabled>Seleccione el aeropuerto</option>
+                @foreach (var airport in Airports)
+                {
+                    <option value="@airport.IdAirport">@airport.Name</option>
+                }
+            </CustomSelect>
+        </div>
+        <label for="arrivalDate" class="col-sm-2 col-form-label">
+            Fecha de llegada
+        </label>
+        <div class="col-sm-2">
+            <InputDate id="arrivalDate" class="form-control" @bind-Value="Flight.ArrivalDate"></InputDate>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="class" class="col-sm-2 col-form-label">
+            Clase
+        </label>
+        <div class="col-sm-2">
+            <select id="class" class="form-control" @bind=@Class.Id>
+                <option value="1">Económica</option>
+                <option value="2">Ejecutiva</option>
+            </select>
+        </div>
+        <label for="adults" class="col-sm-1 col-form-label">
+            Adultos
+        </label>
+        <div class="col-sm-1">
+            <InputNumber id="adults" class="form-control" @bind-Value="Flight.Adults"></InputNumber>
+        </div>
+        <label for="kids" class="col-sm-1 col-form-label">
+            Niños
+        </label>
+        <div class="col-sm-1">
+            <InputNumber id="kids" class="form-control" @bind-Value="Flight.Kids"></InputNumber>
+        </div>
+        <label for="kids" class="col-sm-1 col-form-label">
+            Bebés
+        </label>
+        <div class="col-sm-1">
+            <InputNumber id="babies" class="form-control" @bind-Value="Flight.Babies"></InputNumber>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</EditForm>

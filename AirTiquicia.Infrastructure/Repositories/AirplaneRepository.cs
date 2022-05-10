@@ -60,7 +60,8 @@ namespace AirTiquicia.Infrastructure.Repositories
             currentAirplane.IdAeroline = airplane.IdAeroline;
             currentAirplane.Description = airplane.Description;
             currentAirplane.Size = airplane.Size;
-            currentAirplane.Capacity = airplane.Capacity;
+            currentAirplane.CapacityEconomic = airplane.CapacityEconomic;
+            currentAirplane.CapacityExecutive = airplane.CapacityExecutive;
 
             int rows = await _context.SaveChangesAsync();
             return rows > 0; 

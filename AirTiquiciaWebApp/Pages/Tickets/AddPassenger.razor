@@ -1,0 +1,132 @@
+﻿@page "/Usuarios/Datos/{seats}"
+@inherits AddPassengerBase
+
+@{Counter = 1;}
+
+<h3>Detalles del viaje</h3>
+<br />
+<div>Viaje de ida - @OutboundDepartureDate &emsp; Duración: @formattedOBTimeSpan</div>
+
+<div>Salida: @DepartureAirport.City (@OutboundFlight.DepartureAirport) - @OutboundFlight.DepartureDate.ToString("hh:mm tt")</div>
+<div>Llegada: @DestinationAirport.City (@OutboundFlight.DestinationAirport) - @OutboundFlight.ArrivalDate.ToString("hh:mm tt")</div>
+<div>Vuelo: @OutboundFlight.Code</div>
+<div>Aeronave: @OutboundFlight.IdAirplane</div>
+<div>Aerolínea: @OBAeroline.Name</div>
+<div>Clase: @Class</div>
+<div>Precio: @OBPrice.Cost</div>
+
+<br />
+<div>Viaje de regreso - @ReturnDepartureDate &emsp; Duración: @formattedReturnTimeSpan</div>
+
+<div>Salida: @DestinationAirport.City (@ReturnFlight.DepartureAirport) - @ReturnFlight.DepartureDate.ToString("hh:mm tt")</div>
+<div>Llegada: @DepartureAirport.City (@ReturnFlight.DestinationAirport) - @ReturnFlight.ArrivalDate.ToString("hh:mm tt")</div>
+<div>Vuelo: @ReturnFlight.Code</div>
+<div>Aeronave: @ReturnFlight.IdAirplane</div>
+<div>Aerolínea: @ReturnAeroline.Name</div>
+<div>Clase: @Class</div>
+<div>Precio: @ReturnPrice.Cost</div>
+
+<br />
+<h3>Datos de los pasajeros</h3>
+<EditForm Model="@Passengers" OnValidSubmit="AddPassengers">
+    @foreach (var passenger in Passengers)
+    {
+        <div>Datos de pasajero # @Counter</div>
+        <br />
+        <div class="group col-sm-8">
+            <div class="form-group row">
+                <label for="type" class="col-sm-5 col-form-label">
+                    Tipo de identificación
+                </label>
+                <div class="col-sm-7">
+                    <select id="type" class="form-control" @bind=@passenger.DocumentType>
+                        <option value="1">Pasaporte</option>
+                        <option value="2">Documento de identidad</option>
+                        <option value="3">Licencia de conducir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="id" class="col-sm-5 col-form-label">
+                    Número de Identificación
+                </label>
+                <div class="col-sm-7">
+                    <InputText class="form-control" placeholder="Identificación" @bind-Value="passenger.Id"></InputText>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="firstName" class="col-sm-5 col-form-label">
+                    Nombre
+                </label>
+                <div class="col-sm-7">
+                    <InputText class="form-control" placeholder="Nombre" @bind-Value="passenger.FirstName"></InputText>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lastName" class="col-sm-5 col-form-label">
+                    Apellido
+                </label>
+                <div class="col-sm-7">
+                    <InputText class="form-control" placeholder="Apellidos" @bind-Value="passenger.LastName"></InputText>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="birthdate" class="col-sm-5 col-form-label">
+                    Fecha de nacimiento
+                </label>
+                <div class="col-sm-7">
+                    <InputDate id="birthdate" class="form-control" @bind-Value="passenger.Birthdate"></InputDate>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nacionality" class="col-sm-5 col-form-label">
+                    Nacionalidad
+                </label>
+                <div class="col-sm-7">
+                    <CustomSelect class="form-control" @bind-Value="passenger.Nationality">
+                        <option value="NULL" disabled>Seleccione el país de origen</option>
+                        @foreach (var countrie in Countries)
+                            {
+                            <option value="@countrie">@countrie</option>
+                            }
+                    </CustomSelect>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="phone" class="col-sm-5 col-form-label">
+                    Teléfono
+                </label>
+                <div class="col-sm-7">
+                    <InputText class="form-control" @bind-Value="passenger.Phone"></InputText>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-5 col-form-label">
+                    Email
+                </label>
+                <div class="col-sm-7">
+                    <InputText class="form-control" @bind-Value="passenger.Email"></InputText>
+                </div>
+            </div>
+        </div>
+        <br />
+        Counter++;
+    }
+    <div class="group col-sm-8">
+        <div class="form-group row">
+            <label for="terms" class="col-sm-12 col-form-label">
+                <Input type="checkbox" name="terms" @onchange="AcceptTerms" />
+                <span>Aceptar términos y condiciones.</span>
+            </label>
+        </div>
+        @if (RequireTerms)
+        {
+            <label>Primero debe aceptar los términos y condiciones</label>
+        }
+        <div class="form-group row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7"><button type="submit" class="btn btn-primary block">Comprar tiquetes de vuelo</button></div>
+        </div>
+    </div>
+
+</EditForm>

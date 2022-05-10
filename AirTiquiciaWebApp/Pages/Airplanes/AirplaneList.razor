@@ -12,23 +12,25 @@
             <th>Aerolínea</th>
             <th>Descripción</th>
             <th>Tamaño</th>
-            <th>Capacidad</th>
+            <th>Capacidad económica</th>
+            <th>Capacidad ejecutiva</th>
             <th>Acción</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var airplane in Airplanes)
         {
-            <tr>
-                <td>@airplane.IdAirplane</td>
-                <td>@airplane.IdAeroline</td>
-                <td>@airplane.Description</td>
-                <td>@airplane.Size</td>
-                <td>@airplane.Capacity</td>
-                <td><a href="/Aviones/Detalle/@airplane.IdAirplane" class="btn btn-primary">Ver</a></td>
-                <td><a href="/Aviones/@airplane.IdAirplane" class="btn btn-secondary">Editar</a></td>
+        <tr>
+            <td>@airplane.IdAirplane</td>
+            <td>@airplane.IdAeroline</td>
+            <td>@airplane.Description</td>
+            <td>@airplane.Size</td>
+            <td>@airplane.CapacityEconomic</td>
+            <td>@airplane.CapacityExecutive</td>
+            <td><a href="/Aviones/Detalle/@airplane.IdAirplane" class="btn btn-primary">Ver</a></td>
+            <td><a href="/Aviones/@airplane.IdAirplane" class="btn btn-secondary">Editar</a></td>
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>
